@@ -1,7 +1,17 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Calculator {
-    private String[] defaultSplitter(String input) {
+    private String[] splitInput(String input) {
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            String customDelimiter = input.substring(2, delimiterEndIndex);
+            String numbers = input.substring(delimiterEndIndex + 1);
+
+            return numbers.split(Pattern.quote(customDelimiter));
+        }
+
         return input.split("[,:]");
     }
 
@@ -30,7 +40,7 @@ public class Calculator {
             return 0;
         }
 
-        String[] tokens = defaultSplitter(input);
+        String[] tokens = splitInput(input);
         int[] numbers = parseTokens(tokens);
 
         return sumTokens(numbers);
