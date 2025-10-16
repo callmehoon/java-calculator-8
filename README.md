@@ -50,5 +50,5 @@
 
 ### 3. 예외 처리
 
-- [ ] 음수 입력 시 `IllegalArgumentException` 발생
-- [ ] 숫자가 아닌 값 입력 시 `IllegalArgumentException` 발생
+- [x] 음수 입력 시 `IllegalArgumentException` 발생
+- [x] 숫자가 아닌 값 입력 시 `IllegalArgumentException` 발생

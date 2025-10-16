@@ -19,7 +19,11 @@ public class Calculator {
         int[] numbers = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
-            numbers[i] = Integer.parseInt(tokens[i]);
+            try {
+                numbers[i] = Integer.parseInt(tokens[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.: " + tokens[i]);
+            }
         }
 
         return numbers;
@@ -35,6 +39,14 @@ public class Calculator {
         return sum;
     }
 
+    private void validateNumbers(int[] numbers) {
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("음수 입력은 불가합니다.: " + number);
+            }
+        }
+    }
+
     public int calculate(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
@@ -42,6 +54,7 @@ public class Calculator {
 
         String[] tokens = splitInput(input);
         int[] numbers = parseTokens(tokens);
+        validateNumbers(numbers);
 
         return sumTokens(numbers);
     }
