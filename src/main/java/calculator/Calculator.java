@@ -1,11 +1,25 @@
 package calculator;
 
 public class Calculator {
-    private int sumTokens(String[] tokens) {
+    private String[] defaultSplitter(String input) {
+        return input.split("[,:]");
+    }
+
+    private int[] parseTokens(String[] tokens) {
+        int[] numbers = new int[tokens.length];
+
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i]);
+        }
+
+        return numbers;
+    }
+
+    private int sumTokens(int[] numbers) {
         int sum = 0;
 
-        for (String token : tokens) {
-            sum += Integer.parseInt(token);
+        for (int number : numbers) {
+            sum += number;
         }
 
         return sum;
@@ -16,8 +30,9 @@ public class Calculator {
             return 0;
         }
 
-        String[] tokens = input.split("[,:]");
+        String[] tokens = defaultSplitter(input);
+        int[] numbers = parseTokens(tokens);
 
-        return sumTokens(tokens);
+        return sumTokens(numbers);
     }
 }
